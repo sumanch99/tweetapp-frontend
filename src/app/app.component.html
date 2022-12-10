@@ -1,0 +1,49 @@
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow-sm">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0 p-2" href="#">Tweetapp</a>
+
+  <ul class="navbar-nav px-3">
+    <li class="nav-item">
+      <a class="nav-link" (click)="logout()">Sign out</a>
+    </li>
+  </ul>
+</nav>
+
+<ng-container *ngIf="isLoggedIn(); else elseTemplate">
+  <div class="container-fluid mt-5">
+    <div class="row">
+      <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <div class="sidebar-sticky">
+          <ul class="nav flex-column">
+            <li class="nav-item p-2 m-2">
+              <a
+                class="nav-link border-bottom text-muted d-flex"
+                routerLink="/home"
+              >
+                <p class="h5">
+                  <i class="bi bi-house-door-fill m-2"></i>Dashboard
+                </p>
+              </a>
+            </li>
+            <li class="nav-item p-2 m-2">
+              <a
+                class="nav-link border-bottom text-muted d-flex"
+                routerLink="/my-tweet"
+              >
+                <p class="h5"><i class="bi bi-cursor-fill m-2"></i>Tweet</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>
+</ng-container>
+<ng-template #elseTemplate>
+  <div style="margin-top: 50px">
+    <router-outlet></router-outlet>
+  </div>
+</ng-template>

@@ -1,0 +1,143 @@
+<div class="container" style="margin-top: 5%; margin-left: 40%; width: 50%;">
+  <h2>USER REGISTRATION</h2>
+  <br />
+  <div class="container">
+    <div class="row">
+      <div class="col-sm">
+        <div style="width: 50vh">
+          <form #f="ngForm" (ngSubmit)="submit(f)">
+            <div class="form-group">
+              <label for="email">Username</label>
+              <input
+                required
+                ngModel
+                name="username"
+                #username="ngModel"
+                type="text"
+                class="form-control"
+                placeholder="Username"
+                id="username"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                required
+                ngModel
+                name="email"
+                #email="ngModel"
+                type="email"
+                class="form-control"
+                placeholder="Email"
+                aria-label="Email"
+                id="email"
+              />
+            </div>
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input
+                required
+                ngModel
+                name="firstName"
+                #firstName="ngModel"
+                type="text"
+                class="form-control"
+                placeholder="First Name"
+                aria-label="First Name"
+                id="firstName"
+              />
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input
+                required
+                ngModel
+                name="lastName"
+                #lastName="ngModel"
+                type="text"
+                class="form-control"
+                placeholder="Last Name"
+                aria-label="Last Name"
+                id="lastName"
+              />
+            </div>
+            <div class="form-group">
+              <label>Gender</label>
+              <div class="form-control">
+                <label class="radio-inline">
+                  <input type="radio" name="gender" value="male" ngModel />
+                  Male </label
+                >&nbsp;
+                <label class="radio-inline">
+                  <input type="radio" name="gender" value="female" ngModel />
+                  Female
+                </label>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="dob">Date of Birth</label>
+              <input
+                required
+                ngModel
+                name="dob"
+                #dob="ngModel"
+                type="date"
+                class="form-control"
+                placeholder="Date of Birth"
+                aria-label="Date of Birth"
+                id="dob"
+              />
+            </div>
+            <div class="form-group">
+              <label for="contactNumber">Contact Number</label>
+              <input
+                required
+                ngModel
+                name="contactNumber"
+                #contactNumber="ngModel"
+                type="text"
+                class="form-control"
+                placeholder="Contact Number"
+                aria-label="Contact Number"
+                id="contactnumber"
+              />
+            </div>
+            <div class="form-group mt-2">
+              <label for="password">Password</label>
+              <input
+                required
+                ngModel
+                name="password"
+                #password="ngModel"
+                type="password"
+                class="form-control"
+                placeholder="Password"
+                aria-label="Password"
+                id="password"
+              />
+            </div>
+            <button
+              [disabled]="!f.valid || clicked"
+              class="btn btn-primary col-12 mt-4 border-100"
+            >
+              <span
+                *ngIf="loading"
+                class="spinner-border spinner-border-sm mr-1"
+              ></span>
+              {{ registerButtonText }}
+            </button>
+            <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
+              {{ error }}
+            </div>
+          </form>
+          <br/>
+          <p class="text-muted" style="text-align: center;">
+            <a routerLink="/login" class="text-muted"
+              >Already registered? Login here</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
