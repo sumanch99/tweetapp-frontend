@@ -7,6 +7,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class DateAgoPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
+    console.log('In pipe value:'+value);
+    console.log('Current date:'+new Date());
     if (value) {
         const seconds = Math.floor((+new Date() - +new Date(value)) / 1000);
         if (seconds < 29) // less than 30 seconds ago will show as 'Just now'

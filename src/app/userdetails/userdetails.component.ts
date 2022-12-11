@@ -21,22 +21,7 @@ export class UserdetailsComponent implements OnInit {
   user: string = '';
   username: any | "test";
   tweetId: number = 0;
-  tweetItems: Tweet[] = [{
-    commentsList: [
-      {
-        comment: "comment1",
-        date: "2022-12-05T19:10:29.000+00:00",
-        id: 12,
-        tweetId: 9,
-        username: "xyz"
-      }
-    ],
-    date: Date,
-    id: "any",
-    likedUsers: [],
-    tweets: "string",
-    userName: "string"
-  }];
+  tweetItems: Tweet[] = [];
   tweet!: string;
   comment!: String
   tweetCommentList: any;

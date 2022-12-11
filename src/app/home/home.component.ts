@@ -17,22 +17,7 @@ export class HomeComponent implements OnInit {
   error = false;
   username: any;
   tweetId: number = 0;
-  tweetItems: Tweet[] = [{
-    commentsList: [
-      {
-        comment: "comment1",
-        date: "2022-12-05T19:10:29.000+00:00",
-        id: 12,
-        tweetId: 9,
-        username: "xyz"
-      }
-    ],
-    date: Date,
-    id: "any",
-    likedUsers: [],
-    tweets: "string",
-    userName: "string"
-  }];
+  tweetItems: Tweet[] = [];
   tweet!: string;
   comment!: String
   tweetCommentList: any;
@@ -80,10 +65,11 @@ export class HomeComponent implements OnInit {
       tweet: this.tweet
     }
     this.tweetService.postATweet(tweetobj, this.username).pipe(first()).subscribe(res => {
-      if (res.status == 200) {
+      if (res.status == 201) {
         console.log(res);
         Swal.fire("Done", res.message, 'success');
         this.getAllTweets();
+        this.tweet = '';
       }
       else {
         console.log(res)
@@ -105,7 +91,7 @@ export class HomeComponent implements OnInit {
   getAllTweets() {
     this.tweetService.getAllTweets().pipe(first()).subscribe(res => {
       if (res.status == 200) {
-        // console.log(res);
+        console.log("Calling getAllTweets"+res)
         this.tweetItems = res.data;
       }
       else {
@@ -130,36 +116,5 @@ export class HomeComponent implements OnInit {
   onCloseHandled() {
     this.display = "none";
   }
-
-  submit(f: any) {
-    this.clicked = true;
-    console.log(f.value)
-    this.registerButtonText = "Registering ...";
-    this.registerData = f.value
-    // this.authenticationService.register(this.registerData)
-    //   .pipe(first())
-    //   .subscribe(
-    //     res=>{
-    //       this.clicked = false;
-    //       this.registerButtonText="Register";
-    //       if(res.status==200){
-    //         Swal.fire("Done",res.message, 'success');
-    //       }
-    //       else{
-    //         Swal.fire("Done",res.message, 'error');
-    //       }
-    //       console.log(res)
-    //     },
-    //     error=>{
-    //       this.clicked = false;
-    //       this.registerButtonText="Register";
-    //       console.log(error)
-    //       Swal.fire("Done",error, 'error');
-    //     }
-    //   )
-    //window.location.reload();
-  }
-
-
 
 }

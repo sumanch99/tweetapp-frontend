@@ -53,22 +53,18 @@ export class TweetPageComponent implements OnInit {
   }
 
   deleteTweet(tweetId: any) {
-
-    this.tweetService.deleteTweet(this.username, tweetId).pipe(first()).subscribe(res => {
-      Swal.fire({
-        title: 'Do you want to save the changes?',
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: 'Yes',
-        denyButtonText: 'No',
-        customClass: {
-          actions: 'my-actions',
-          cancelButton: 'order-1 right-gap',
-          confirmButton: 'order-2',
-          denyButton: 'order-3',
-        }
-      }).then((result) => {
-        if (result.isConfirmed) {
+    Swal.fire({
+      title: 'Do you want to save the changes?',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      customClass: {
+        actions: 'my-actions',
+        cancelButton: 'order-1 right-gap',
+        confirmButton: 'order-2'
+      }
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.tweetService.deleteTweet(this.username, tweetId).pipe(first()).subscribe(res => {
           if (res.status == 200) {
             console.log(res);
             Swal.fire("Deleted", res.message, 'success');
@@ -79,12 +75,12 @@ export class TweetPageComponent implements OnInit {
             console.log(res)
             Swal.fire("Error", res.message);
           }
-        } else if (result.isDenied) {
-          Swal.fire('Changes are not saved', '', 'info')
-        }
-      })
-
+        })
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info')
+      }
     })
+    
   }
 
   clicked!: boolean;
@@ -95,22 +91,7 @@ export class TweetPageComponent implements OnInit {
   user: string = '';
   username: any | "test";
   tweetId: number = 0;
-  tweetItems: Tweet[] = [{
-    commentsList: [
-      {
-        comment: "comment1",
-        date: "2022-12-05T19:10:29.000+00:00",
-        id: 12,
-        tweetId: 9,
-        username: "xyz"
-      }
-    ],
-    date: Date,
-    id: "any",
-    likedUsers: [],
-    tweets: "string",
-    userName: "string"
-  }];
+  tweetItems: Tweet[] = [];
   tweet!: string;
   comment!: String
   tweetCommentList: any;
@@ -230,36 +211,5 @@ export class TweetPageComponent implements OnInit {
   onCloseHandled() {
     this.display = "none";
   }
-
-  // submit(f: any) {
-  //   this.clicked = true;
-  //   console.log(f.value)
-  //   this.registerButtonText = "Registering ...";
-  //   this.registerData = f.value
-  //   // this.authenticationService.register(this.registerData)
-  //   //   .pipe(first())
-  //   //   .subscribe(
-  //   //     res=>{
-  //   //       this.clicked = false;
-  //   //       this.registerButtonText="Register";
-  //   //       if(res.status==200){
-  //   //         Swal.fire("Done",res.message, 'success');
-  //   //       }
-  //   //       else{
-  //   //         Swal.fire("Done",res.message, 'error');
-  //   //       }
-  //   //       console.log(res)
-  //   //     },
-  //   //     error=>{
-  //   //       this.clicked = false;
-  //   //       this.registerButtonText="Register";
-  //   //       console.log(error)
-  //   //       Swal.fire("Done",error, 'error');
-  //   //     }
-  //   //   )
-  //   //window.location.reload();
-  // }
-
-
 
 }
