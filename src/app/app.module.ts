@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { DateAgoPipe } from './pipes/date-ago.pipe';
 import { TweetPageComponent } from './tweet-page/tweet-page.component';
 import { ForgotComponent } from './forgot/forgot.component';
+import { UserlistComponent } from './userlist/userlist.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ForgotComponent } from './forgot/forgot.component';
     HomeComponent,
     DateAgoPipe,
     TweetPageComponent,
-    ForgotComponent
+    ForgotComponent,
+    UserlistComponent
   ],
   imports: [
     BrowserModule,

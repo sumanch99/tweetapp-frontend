@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { Tweet } from '../model/Tweets';
+import { AuthService } from '../service/auth.service';
 import { TweetService } from '../service/tweet.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { TweetService } from '../service/tweet.service';
 })
 export class TweetPageComponent implements OnInit {
   editTweetobj: any;
+  userlist: any;
   editATweet() {
     let t = {
       tweet: this.editTweetobj
@@ -90,6 +92,7 @@ export class TweetPageComponent implements OnInit {
   registerData: any;
   loading = false;
   error = false;
+  user: string = '';
   username: any | "test";
   tweetId: number = 0;
   tweetItems: Tweet[] = [{
@@ -113,7 +116,7 @@ export class TweetPageComponent implements OnInit {
   tweetCommentList: any;
   id!: number;
 
-  constructor(private tweetService: TweetService) {
+  constructor(private tweetService: TweetService, private authService: AuthService) {
     this.getusername()
   }
   postAcomment() {
@@ -147,6 +150,28 @@ export class TweetPageComponent implements OnInit {
         Swal.fire("Error", res.message);
       }
     })
+  }
+
+  getUsernames(user: any) {
+    let uList: any[] = []
+    this.authService.getAllUsersWithRegex(user).pipe(first()).subscribe(res => {
+      if (res.status == 200) {
+        console.log(res);
+        let users = res.data;
+        let i = 0;
+        users.forEach((element: { username: any; }) => {
+          console.log(element.username)
+          uList[i] = element.username
+          i++;
+        });
+        console.log(uList)
+      }
+      else {
+        console.log(res)
+        Swal.fire("Error", res.message);
+      }
+    })
+    this.userlist = uList
   }
 
   tweetNow() {

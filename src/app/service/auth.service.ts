@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../model/User';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ForgotPassword } from '../model/Forgotpassword';
 
 @Injectable({
@@ -69,6 +69,14 @@ export class AuthService {
         console.log(response);
         return response;
       }));
+  }
+
+  getAllUsersWithRegex(user: any): Observable<any> {
+    return this.http.get<any>(`${environment.regex}${user}`);
+  }
+
+  getAllUsers(): Observable<any> {
+    return this.http.get<any>(`${environment.getAllUsers}`);
   }
 
 }

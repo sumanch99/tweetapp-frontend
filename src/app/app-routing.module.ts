@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { TweetPageComponent } from './tweet-page/tweet-page.component';
+import { UserlistComponent } from './userlist/userlist.component';
 import { AuthGuard } from './util/auth.guard';
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'my-tweet', component: TweetPageComponent, canActivate: [AuthGuard] },
-  { path: 'forgot-password', component:ForgotComponent }
+  { path: 'forgot-password', component:ForgotComponent },
+  { path: 'user-list', component:UserlistComponent, canActivate: [AuthGuard] }
 ];
  
 @NgModule({
