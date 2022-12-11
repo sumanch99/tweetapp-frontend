@@ -15,6 +15,7 @@ import { DateAgoPipe } from './pipes/date-ago.pipe';
 import { TweetPageComponent } from './tweet-page/tweet-page.component';
 import { ForgotComponent } from './forgot/forgot.component';
 import { UserlistComponent } from './userlist/userlist.component';
+import { UserdetailsComponent } from './userdetails/userdetails.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { UserlistComponent } from './userlist/userlist.component';
     DateAgoPipe,
     TweetPageComponent,
     ForgotComponent,
-    UserlistComponent
+    UserlistComponent,
+    UserdetailsComponent
   ],
   imports: [
     BrowserModule,

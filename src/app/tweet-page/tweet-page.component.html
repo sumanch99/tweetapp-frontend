@@ -3,40 +3,6 @@
     <!--profile-->
     <main class="container">
       <div class="my-1 p-1 bg-body rounded">
-        <div
-          class="d-flex align-items-center p-3 my-3 text-white rounded shadow-lg"
-          style="background-color: rgb(7, 25, 31)"
-        >
-          <h2 class="me-3"><i class="bi bi-send-fill"></i></h2>
-          <div class="lh-3">
-            <h1 class="h6 mb-0 text-white lh-1">
-              Welcome to your profile {{ username }}
-            </h1>
-            <small>@{{ username }}</small>
-          </div>
-        </div>
-        <div class="input-group mb-3 d-flex p-2">
-          <div class="form-group">
-            <input
-              required
-              [(ngModel)]="user"
-              (change)="getUsernames(user)"
-              name="username"
-              type="text"
-              class="form-control"
-              placeholder="Enter user"
-              aria-label="Enter user"
-              style="width: 100%"
-              id="username"
-            />
-            <div
-              *ngFor="let u of userlist"
-              class="p-3 my-3 text-bold text-dark rounded shadow-lg"
-            >
-              <p>{{ u }}</p>
-            </div>
-          </div>
-        </div>
         <!-- All Tweets -->
         <div class="my-4 p-3 bg-body rounded shadow-lg">
           <h6 class="border-bottom pb-2 mb-0">My Tweets</h6>

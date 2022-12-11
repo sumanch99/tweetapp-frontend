@@ -15,7 +15,7 @@ export let environment = {
   deleteTweet: `${baseUrl.apiUrl}/`,
   forgotPassword: `${baseUrl.apiUrl}/`,
   regex: `${baseUrl.apiUrl}/user/search/`,
-  getAllUsers : `${baseUrl.apiUrl}/users/all`,
+  getAllUsers : `${baseUrl.apiUrl}/users/all`
 };
 
 /*
