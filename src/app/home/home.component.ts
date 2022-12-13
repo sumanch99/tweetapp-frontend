@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit {
   comment!: String
   tweetCommentList: any;
   id!: number;
+  tweetLikeList: any;
+  likeDisplay = "none";
 
   constructor(private tweetService: TweetService) {
 
@@ -115,6 +117,23 @@ export class HomeComponent implements OnInit {
   }
   onCloseHandled() {
     this.display = "none";
+  }
+
+  openLikeModal(tweetId: number) {
+    //this.tweetId = tweetId - 1
+    let index = this.tweetItems.findIndex(object => {
+      return object.id === tweetId;
+    });
+
+    this.id = tweetId
+    this.tweetId = index
+    this.tweetLikeList = this.tweetItems[index].likedUsers
+    console.log(this.tweetId)
+    this.likeDisplay = "block";
+  }
+
+  onCloseLikeModalHandled() {
+    this.likeDisplay = "none";
   }
 
 }

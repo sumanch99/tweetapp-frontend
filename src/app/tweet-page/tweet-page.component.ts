@@ -13,15 +13,20 @@ import { TweetService } from '../service/tweet.service';
 export class TweetPageComponent implements OnInit {
   editTweetobj: any;
   userlist: any;
+  tweetLikeList: any;
+  displayEdit!: string;
+  likeDisplay = "none";
+
   editATweet() {
     let t = {
       tweet: this.editTweetobj
     }
     this.tweetService.editTweet(t, this.username, this.id).pipe(first()).subscribe(res => {
-      if (res.status == 200) {
+      if (res.status == 201) {
         console.log(res);
         Swal.fire("Done", res.message, 'success');
         this.getAllTweets();
+        this.onCloseHandled();
         this.onCloseHandledEdit();
       }
       else {
@@ -33,7 +38,7 @@ export class TweetPageComponent implements OnInit {
   onCloseHandledEdit() {
     this.displayEdit = "none";
   }
-  displayEdit!: string;
+  
 
   editTweet(tweetId: any) {
     this.openEditModal(tweetId)
@@ -48,7 +53,8 @@ export class TweetPageComponent implements OnInit {
     this.id = tweetId
     this.tweetId = index
 
-    console.log(this.tweetId)
+    console.log("this.tweetId:"+this.tweetId)
+    console.log(this.tweetItems[this.tweetId].tweets)
     this.displayEdit = "block";
   }
 
@@ -188,6 +194,7 @@ export class TweetPageComponent implements OnInit {
       if (res.status == 200) {
         // console.log(res);
         this.tweetItems = res.data;
+        console.log(this.tweetItems);
       }
       else {
         console.log(res)
@@ -210,6 +217,23 @@ export class TweetPageComponent implements OnInit {
   }
   onCloseHandled() {
     this.display = "none";
+  }
+
+  openLikeModal(tweetId: number) {
+    //this.tweetId = tweetId - 1
+    let index = this.tweetItems.findIndex(object => {
+      return object.id === tweetId;
+    });
+
+    this.id = tweetId
+    this.tweetId = index
+    this.tweetLikeList = this.tweetItems[index].likedUsers
+    console.log(this.tweetId)
+    this.likeDisplay = "block";
+  }
+
+  onCloseLikeModalHandled() {
+    this.likeDisplay = "none";
   }
 
 }

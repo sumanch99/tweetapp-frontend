@@ -21,7 +21,7 @@
                 d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"
               />
             </svg>
-            <h6 class="pt-1 pb-2 mb-0">Tweet Now</h6>
+            <h6 class="pt-1 pb-2 mb-0">To Everyone</h6>
           </div>
 
           <div class="d-flex text-muted">
@@ -33,7 +33,7 @@
                   style="height: 100px"
                   [(ngModel)]="tweet"
                 ></textarea>
-                <label for="floatingTextarea2">Type a tweet....</label>
+                <label for="floatingTextarea2">What's happening?</label>
                 <div class="input-group-append mt-4">
                   <button
                     class="btn btn-primary"
@@ -50,27 +50,14 @@
 
         <!-- All Tweets -->
         <div class="my-4 p-3 bg-body rounded shadow-lg">
-          <h6 class="border-bottom pb-2 mb-0">All Tweets</h6>
+          <h6 class="border-bottom pb-2 mb-0">Take a look at the recent tweets...</h6>
 
           <div *ngFor="let t of tweetItems" class="list-group w-auto">
             <a
               class="list-group-item list-group-item-action d-flex gap-3 py-3"
               aria-current="true"
             >
-              <svg
-                class="bd-placeholder-img flex-shrink-0 me-2 rounded"
-                width="32"
-                height="32"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="Placeholder: 32x32"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false"
-              >
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#007bff" />
-                <text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
-              </svg>
+              
               <div class="d-flex gap-2 w-100 justify-content-between">
                 <div>
                   <h6 class="mb-0">@{{ t.userName }}</h6>
@@ -80,7 +67,7 @@
                   <button type="button" class="btn" (click)="likeATweet(t.id)">
                     <i class="bi bi-hand-thumbs-up-fill"></i>
                   </button>
-                  <span class="badge badge-primary text-muted">{{
+                  <span (click)="openLikeModal(t.id)" style="cursor: pointer;" class="badge badge-primary text-muted">{{
                     t.likedUsers.length == 0 ? 0 : t.likedUsers.length
                   }}</span>
                   <button class="btn" (click)="openModal(t.id)">
@@ -110,6 +97,58 @@
       crossorigin="anonymous"
     ></script>
 
+
+    <!--Like Modal-->
+    <div
+    class="modal"
+    tabindex="-1"
+    role="dialog"
+    [ngStyle]="{ display: likeDisplay }"
+  >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="modal-title d-flex text-muted">
+        
+            <h6 class="pb-2 mb-0">Liked By</h6>
+          </div>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="onCloseLikeModalHandled()"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div *ngFor="let l of tweetLikeList" class="list-group w-auto">
+            <a
+              class="list-group-item list-group-item-action d-flex gap-3 py-3"
+              aria-current="true"
+            >
+              <div class="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                    {{ l.firstName }} {{ l.lastName }} <h6 class="mb-0">@{{ l.username }}</h6>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-default"
+            (click)="onCloseLikeModalHandled()"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!--Comment Modal-->
     <div
       class="modal"
       tabindex="-1"
@@ -133,7 +172,7 @@
                   d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"
                 />
               </svg>
-              <h6 class="pb-2 mb-0">Comment Now</h6>
+              <h6 class="pb-2 mb-0">Commented By</h6>
             </div>
             <button
               type="button"
@@ -147,20 +186,6 @@
           <div class="modal-body">
             <div class="my-1 p-1">
               <div class="d-flex text-muted pt-3">
-                <svg
-                  class="bd-placeholder-img flex-shrink-0 me-2 rounded"
-                  width="32"
-                  height="32"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="Placeholder: 32x32"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#007bff" />
-                  <text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
-                </svg>
 
                 <p class="pb-3 mb-0 small lh-sm">
                   <strong class="d-block text-gray-dark"
@@ -175,7 +200,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Enter your Comment"
+                    placeholder="Enter Comment Here..."
                     [(ngModel)]="comment"
                   />
                   <div class="input-group-append">
@@ -196,20 +221,7 @@
                 class="list-group-item list-group-item-action d-flex gap-3 py-3"
                 aria-current="true"
               >
-                <svg
-                  class="bd-placeholder-img flex-shrink-0 me-2 rounded"
-                  width="32"
-                  height="32"
-                  xmlns="http://www.w3.org/2000/svg"
-                  role="img"
-                  aria-label="Placeholder: 32x32"
-                  preserveAspectRatio="xMidYMid slice"
-                  focusable="false"
-                >
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#007bff" />
-                  <text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
-                </svg>
+                
                 <div class="d-flex gap-2 w-100 justify-content-between">
                   <div>
                     <h6 class="mb-0">@{{ c.username }}</h6>

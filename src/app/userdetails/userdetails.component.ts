@@ -25,7 +25,10 @@ export class UserdetailsComponent implements OnInit {
   tweet!: string;
   comment!: String
   tweetCommentList: any;
+  tweetLikeList: any;
   id!: number;
+  display = "none";
+  likeDisplay = "none";
 
   constructor(private tweetService: TweetService, private authService: AuthService, private route: ActivatedRoute) {
     this.getusername()
@@ -85,7 +88,7 @@ export class UserdetailsComponent implements OnInit {
     this.userlist = uList
   }
 
-  display = "none";
+  
   
   ngOnInit(): void {
     
@@ -131,6 +134,23 @@ export class UserdetailsComponent implements OnInit {
   }
   onCloseHandled() {
     this.display = "none";
+  }
+
+  openLikeModal(tweetId: number) {
+    //this.tweetId = tweetId - 1
+    let index = this.tweetItems.findIndex(object => {
+      return object.id === tweetId;
+    });
+
+    this.id = tweetId
+    this.tweetId = index
+    this.tweetLikeList = this.tweetItems[index].likedUsers
+    console.log(this.tweetId)
+    this.likeDisplay = "block";
+  }
+
+  onCloseLikeModalHandled() {
+    this.likeDisplay = "none";
   }
 
 }

@@ -1,9 +1,9 @@
-<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow-sm">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0 p-2" href="#">Tweetapp</a>
+<nav class="navbar navbar-dark fixed-top bg-info flex-md-nowrap p-0 shadow-sm">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0 p-2" href="/home"><img src="https://img.icons8.com/ios-filled/30/FFFFFF/dove.png"/>Tweetapp</a>
 
   <ul class="navbar-nav px-3">
     <li class="nav-item">
-      <a class="nav-link" (click)="logout()">Sign out</a>
+      <a class="nav-link" style="color: white;" *ngIf="isLoggedIn();" (click)="logout()" routerLink="login">Sign out</a>
     </li>
   </ul>
 </nav>

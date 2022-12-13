@@ -39,6 +39,8 @@ export class RegisterComponent implements OnInit {
 
   submit(f:any){
     this.clicked = true;
+    console.log("f is:")
+    console.log(f)
     console.log(f.value)
     this.registerButtonText="Registering ...";
     this.registerData = f.value
